@@ -1,0 +1,28 @@
+{
+  "name": "postcss-mobile-viewportunits",
+  "version": "0.0.1",
+  "description": "Replaces viewport units for mobile devices not supporting it.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "author": "Marius Büscher <marius.buescher@denkwerk.com>",
+  "repository": "mariusbuescher/postcss-mobile-viewportunits",
+  "bugs": {
+    "url": "https://github.com/mariusbuescher/postcss-mobile-viewportunits/issues"
+  },
+  "homepage": "https://github.com/mariusbuescher/postcss-mobile-viewportunits",
+  "license": "MIT",
+  "dependencies": {
+    "postcss": "^5.0.21"
+  },
+  "keywords": [
+    "postcss",
+    "css",
+    "postcss-plugin",
+    "ios",
+    "iphone",
+    "ipad",
+    "polyfill"
+  ]
+}
