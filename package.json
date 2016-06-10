@@ -1,6 +1,6 @@
 {
   "name": "postcss-mobile-viewportunits",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Replaces viewport units for mobile devices not supporting it.",
   "main": "index.js",
   "scripts": {
