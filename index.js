@@ -81,7 +81,6 @@ var mobileViewportunits = postcss.plugin( 'postcss-mobile-viewportunits', functi
             } );
 
             for ( var selector in selectors ) {
-                console.log(selector);
 
                 var newRule = postcss.rule( {
                     selector: selector
