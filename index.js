@@ -70,8 +70,7 @@ var mobileViewportunits = postcss.plugin( 'postcss-mobile-viewportunits', functi
                         rules[ device.mediaquery ][ selector ] = [];
                     }
 
-                    var newDecl = postcss.decl( {
-                        prop: decl.prop,
+                    var newDecl = decl.clone( {
                         value: value
                     } );
 
