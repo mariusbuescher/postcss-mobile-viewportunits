@@ -43,14 +43,21 @@ var mobileViewportunits = postcss.plugin( 'postcss-mobile-viewportunits', functi
     return function( css, result ) {
         var rules = {};
         css.walkDecls( function( decl ) {
-            if ( decl.value.match(/(vh|vw)/) ) {
+            if ( decl.value.match(/(vh|vw|vmin|vmax)/) ) {
 
                 var selector = decl.parent.selector;
 
                 opts.devices.forEach( function( device ) {
-                    var value = decl.value.replace(/(\d+)(vh|vw)/gi, function( fullUnit, value, unit) {
+                    var value = decl.value.replace(/(\d+)(vh|vw|vmin|vmax)/gi, function( fullUnit, value, unit) {
                         var relativeValue = Number(value) / 100;
-                        var multiplier = (unit === 'vw') ? device.width : device.height;
+                        var multiplier;
+                        if ( unit === 'vmin' ) {
+                            multiplier = (device.width > device.height) ? device.height : device.width;
+                        } else if ( unit === 'vmax' ) {
+                            multiplier = (device.width > device.height) ? device.width : device.height;
+                        } else {
+                            multiplier = (unit === 'vw') ? device.width : device.height;
+                        }
 
                         return (relativeValue * multiplier) + 'px';
                     } );
