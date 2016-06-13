@@ -14,6 +14,7 @@
   "homepage": "https://github.com/mariusbuescher/postcss-mobile-viewportunits",
   "license": "MIT",
   "dependencies": {
+    "css-mediaquery": "^0.1.2",
     "postcss": "^5.0.21"
   },
   "keywords": [

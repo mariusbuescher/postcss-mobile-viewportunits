@@ -1,4 +1,5 @@
 var postcss = require( 'postcss' );
+var matchMedia = require( 'css-mediaquery' ).match;
 
 var mobileViewportunits = postcss.plugin( 'postcss-mobile-viewportunits', function( opts ) {
     opts = opts !== undefined ? opts : {
@@ -50,6 +51,17 @@ var mobileViewportunits = postcss.plugin( 'postcss-mobile-viewportunits', functi
                 var declMq = decl.parent.parent.type === 'atrule' ? decl.parent.parent.params : false
 
                 opts.devices.forEach( function( device ) {
+                    if (declMq !== false) {
+                        var deviceMatches = matchMedia(declMq, {
+                            width: device.width + 'px',
+                            height: device.height + 'px'
+                        } );
+
+                        if (deviceMatches !== true) {
+                            return;
+                        }
+                    }
+
                     var value = decl.value.replace(/(\d+)(vh|vw|vmin|vmax)/gi, function( fullUnit, value, unit) {
                         var relativeValue = Number(value) / 100;
                         var multiplier;
