@@ -81,13 +81,21 @@ var mobileViewportunits = postcss.plugin( 'postcss-mobile-viewportunits', functi
             } );
 
             for ( var selector in selectors ) {
+                var declsInTree = [];
 
                 var newRule = postcss.rule( {
                     selector: selector
                 } );
 
                 selectors[ selector ].forEach( function( decl ) {
-                    newRule.append( decl );
+                    var matchingDecls = declsInTree.filter(function ( tDecl ) {
+                        return decl.prop  === tDecl.prop && decl.value === tDecl.value;
+                    });
+
+                    if (matchingDecls.length === 0) {
+                        declsInTree.push(decl);
+                        newRule.append( decl );
+                    }
                 } );
 
                 newAtRule.append( newRule );
