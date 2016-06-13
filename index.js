@@ -112,7 +112,7 @@ var mobileViewportunits = postcss.plugin( 'postcss-mobile-viewportunits', functi
                 newAtRule.append( newRule );
             }
 
-            result.root.append( newAtRule );
+            result.root.prepend( newAtRule );
         }
 
     };
