@@ -1,4 +1,5 @@
 var postcss = require( 'postcss' );
+
 var mobileViewportunits = postcss.plugin( 'postcss-mobile-viewportunits', function( opts ) {
     opts = opts !== undefined ? opts : {
         devices: [
@@ -46,6 +47,7 @@ var mobileViewportunits = postcss.plugin( 'postcss-mobile-viewportunits', functi
             if ( decl.value.match(/(vh|vw|vmin|vmax)/) ) {
 
                 var selector = decl.parent.selector;
+                var declMq = decl.parent.parent.type === 'atrule' ? decl.parent.parent.params : false
 
                 opts.devices.forEach( function( device ) {
                     var value = decl.value.replace(/(\d+)(vh|vw|vmin|vmax)/gi, function( fullUnit, value, unit) {
@@ -62,19 +64,22 @@ var mobileViewportunits = postcss.plugin( 'postcss-mobile-viewportunits', functi
                         return (relativeValue * multiplier) + 'px';
                     } );
 
-                    if ( !rules[ device.mediaquery ] ) {
-                        rules[ device.mediaquery ] = {};
+                    var mediaquery = device.mediaquery;
+                        mediaquery += (declMq) ? ' and ' + declMq : '';
+
+                    if ( !rules[ mediaquery ] ) {
+                        rules[ mediaquery ] = {};
                     }
 
-                    if ( Array.isArray( rules[ device.mediaquery ][ selector ] ) === false ) {
-                        rules[ device.mediaquery ][ selector ] = [];
+                    if ( Array.isArray( rules[ mediaquery ][ selector ] ) === false ) {
+                        rules[ mediaquery ][ selector ] = [];
                     }
 
                     var newDecl = decl.clone( {
                         value: value
                     } );
 
-                    rules[ device.mediaquery ][ selector ].push( newDecl );
+                    rules[ mediaquery ][ selector ].push( newDecl );
                 } );
             }
         } );
