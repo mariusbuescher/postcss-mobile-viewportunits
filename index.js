@@ -77,7 +77,7 @@ var mobileViewportunits = postcss.plugin( 'postcss-mobile-viewportunits', functi
                     } );
 
                     var mediaquery = device.mediaquery;
-                        mediaquery += (declMq) ? ' and ' + declMq : '';
+                        mediaquery += (declMq) ? ' and ' + declMq : ' and (min-width: 0px)';
 
                     if ( !rules[ mediaquery ] ) {
                         rules[ mediaquery ] = {};
